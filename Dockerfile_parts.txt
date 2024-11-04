@@ -1,0 +1,25 @@
+FROM baseImage_name:image_version => use baseImage_name image and image_version version for docker file
+
+RUN linux_command => execute linux_command command, while bilding docker file
+
+CMD linux_command => execute linux_command commands when you want to run container (shell form)
+
+CMD ["command_1", "command_2", ...] => execute commands in braket when you want to run container (execute form)
+
+ENTRYPOINT ["command_1", "command_2", ...] => execute commands in braket when you want to run container (you can not over write it)
+
+WORKDIR /path_name => create a work directory for container that named path_name
+
+COPY app_file_in_server /app_file_in_container => copy app_file_in_server in the server to the app_file_in_container in container
+
+ENV key=value => set a variable for docker container
+
+EXPOSE port_number => specifies that container listening to port_number port for executing application (this port refers to container port, not server port)
+
+USER user_name => specifies the user wich after build docker file, you can work with that user
+
+note : you can create a docker ignore file and give a path to it, docker wont build any file in that path
+
+
+
+

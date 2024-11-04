@@ -1,0 +1,184 @@
+-------------- server information -------------------------------------------------
+
+lsb_release -a => show information about server
+
+cat /etc/*release* => show more information about server
+
+-------------------------------------------------------------------------------
+
+-------------- install docker -------------------------------------------------
+
+curl -fsSL https://get.docker.com -o get-docker.sh
+
+sudo sh get-docker.sh
+
+-------------------------------------------------------------------------------
+
+-------------- docker commands -------------------------------------------------
+
+docker => show docker commands
+
+docker version => show information about docker version
+
+docker run image_name => run image_name image in a new container
+
+docker run image_name linux_cammand => run image_name image in a new container and after that, it will execute linux_cammand cammand
+
+docker images => show the installed images
+
+docker ps => show images that are executing
+
+docker ps -a => show the images
+
+docker run image_name sleep seconde_number => run image_name image in a new container for seconde_number seconde
+
+docker run -it image_name bash(or sh) => create a new container and enter to it
+
+docker container ls => show containers that are executing
+
+docker container ls -a => show the containers
+
+docker container exec -it container_id bash => enter to the container_id container
+
+docker container stop container_id => stop container_id container
+
+docker image rm image_name => delete image_name image (use this for force delete : docker image rm -f image_name)
+
+docker image build -t tag_image_name docker_file_location => build docker file in docker_file_location path with tag_image_name tag name
+
+docker run -p server_port:container_port image_name => install and run image_name image in a new container and map port container_port to the port server_port
+
+docker history image_name => see the container layers from image_name image
+
+docker image prune => remove all dangling images
+
+docker container prune => remove all stopped containers
+
+docker build -t image_name:tag_or_version_number docker_image_location => create a tag for image_name image
+
+docker build -t tag_name -f Dockerfile_name path_of_Dockerfile_name => build image from Dockerfile_name docker file with tag_name tag
+
+docker image remove image_name:tag_or_version_number => remove tag for image_name image
+
+docker image tag image_name:image_tag image_name:new_tag_or_version_number => change image_name image tag (using tag name)
+
+docker image tag image_id image_name:tag_or_version_number => change image_name image tag (using image id)
+
+docker image save -o image_name.tar image_name:tag_or_version_number => save image_name image on server in image_name.tar file
+
+docker image load -i image_name.tar => load image from image_name.tar file
+
+docker run -d image_name => run image_name image in a new container (detach mode)
+
+docker run -d --name container_name image_name => run image_name image in a new container with container_name name (detach mode)
+
+docker logs --help => show the description about docker log
+
+docker logs container_id => show the container_id container logs
+
+docker logs -n lines_number container_id => show the container_id container logs (last lines_number lines)
+
+docker logs -n lines_number -t container_id => show the container_id container logs with time (last lines_number lines)
+
+docker run -d -p server_port:container_port --name container_name image_name => install and run image_name image with container_name name in a new container and map port container_port to the port server_port (detach mode)
+
+docker exec container_name linux_command => execute linux_command command in container_name container (the container is executing in detach mode)
+
+docker exec -it container_name sh => enter to the container_name container in execute mode (using container name)
+
+docker exec -it container_id sh => enter to the container_id container in execute mode (using container id)
+
+docker exec -it -u root container_id sh => enter to the container_id container in execute mode with root user
+
+docker start container_name => start container_name container
+
+docker stop container_name => stop container_name container
+
+docker cp container_id:/container_path/file_name.txt server_path => copy file_name.txt from docker container in /container_path/file_name path, to the server
+
+docker cp file_name.txt container_id:/container_path => copy file_name.txt from server to container_id container in /container_path path
+
+docker run -d -p server_port:container_port -v $(pwd):/container_path image_name => create a new container and run it on the server_port server from image_name image, with sync to the current location on the server (pwd) to the /container_path path from container
+
+-------------------------------------------------------------------------------
+
+-------------- push to the docker hub repository -------------------------------------------------
+
+docker login => login to the docker hub account
+
+docker tag image_name account_name/tag_name => put tag_name tag for image_name image befor pushing this image on docker hub
+
+docker push account_name/tag_name => push image with tag_name tag to the docker hub
+
+-------------------------------------------------------------------------------
+
+-------------- docker volume -------------------------------------------------
+
+docker volume => show docker volume commands
+
+docker volume create volume_name => create volume_name volume
+
+docker volume inspect volume_name => show the information about volume_name volume (in JSON format)
+
+docker run -d -p server_port:container_port -v volume_name:/path_in_container image_name => create a new container and run it on the server_port server from image_name image, with a volume_name volume
+in /path_in_container path in the container
+
+-------------------------------------------------------------------------------
+
+-------------- docker compose -------------------------------------------------
+
+docker compose --version => see the version and commands for docker compose
+
+docker compose => show the docker compose commands
+
+docker compose up => install project images and run the project containers (run this command in project path)
+
+docker compose build --help => show description about docker compose build
+
+docker compose build => build and make projects images
+
+docker compose -f yaml_file_name.yaml build => build and make projects images using yaml_file_name.yaml file
+
+docker compose build --no-cache => build and make projects images without using cache
+
+docker compose up --build => build and make projects images and then install project images and run the project containers
+
+docker compose up -d => install project images and run the project containers (detach mode)
+
+docker compose down => stop project containers (project images will not delete)
+
+docker network ls => show docker network modes and current containers network modes
+
+-------------------------------------------------------------------------------
+
+-------------- docker machine -------------------------------------------------
+
+docker-machine --version => show the version for docker machine
+
+docker-machine create --driver driver_name --driver_token_service driver_token --driver_image image_name --engine-install-url "engine_url" test => create a server for docker machine
+
+docker-machine ls => show docker machines
+
+docker machine ssh server_name => shh to the server_name server that initialized with docker machine
+
+docker-machine env machine_name => set an eval for machine_name machine
+
+-------------------------------------------------------------------------------
+
+-------------- docker swarm -------------------------------------------------
+
+docker swarm init --help => show the docker swarm commands
+
+docker swarm init --advertise-addr server_ip => select server_ip server as master node for docker swarm
+
+docker node ls => see the docker swarm nodes
+
+docker swarm join-token worker => show master node join-token (other servers can use this join-token to join as a worker)
+
+docker stack deploy --compose-file docker_compose_file.yml service_name => deploy project services using docker_compose_file.yml file on server
+
+docker stack services service_name => show project services status
+
+docker service scale service_name=replicas_number => define a replicas_number replicas number for service_name service
+
+-------------------------------------------------------------------------------
